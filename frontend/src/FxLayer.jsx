@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react';
 
-const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.prize-detail-card,.gallery-card,.journey-card,.schedule-item';
+const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.prize-detail-card,.gallery-card,.journey-card,.schedule-item,.lineage-card,.lexicon-card';
 const MAGNET = '.button,.nav-cta,.competition-link,.footer-end>button,.text-link,.back-to-top';
 const fine = () => window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;

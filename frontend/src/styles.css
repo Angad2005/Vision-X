@@ -337,6 +337,14 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
   border-bottom: 1px solid rgba(169,133,76,.2);
   background: radial-gradient(circle at 87% 44%, rgba(169,133,76,.09), transparent 24%), linear-gradient(100deg, #eee8de, #f5f1e9 59%, #e9e0d3);
 }
+.greek-relief {
+  position: absolute; right: 0; bottom: 0; z-index: 0; width: min(520px, 58%); height: 96px;
+  pointer-events: none; opacity: .14;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 80'%3E%3Cg fill='none' stroke='%23a9854c' stroke-width='2'%3E%3Cpath d='M8 72V8h48v56H24V24h24v24H40V40'/%3E%3Cpath d='M68 72V8h44v64H84V24h12v40H80V40h8'/%3E%3C/g%3E%3C/svg%3E") repeat-x right bottom / 120px 80px;
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+.hero-section .greek-relief { width: min(620px, 54%); height: 116px; opacity: .17; }
+.app-shell[data-theme="dark"] .page-hero .greek-relief { opacity: .2; }
 .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; right: 2%; top: -195px; border: 1px solid rgba(169,133,76,.25); border-radius: 50%; box-shadow: 0 0 0 28px rgba(169,133,76,.035), 0 0 0 68px rgba(169,133,76,.025); }
 .page-hero::after { content: ''; position: absolute; width: 295px; height: 295px; right: 10%; top: -88px; border: 1px solid rgba(148,31,48,.13); border-radius: 50%; }
 .page-hero-kicker { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; color: var(--red); font: 800 8px var(--mono); letter-spacing: 1.8px; }
@@ -993,6 +1001,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 /* Decorative research grid and classical keylines become visible on both modes. */
 .page-hero { isolation: isolate; }
 .page-hero > * { position: relative; z-index: 1; }
+.page-hero > .greek-relief { position: absolute; z-index: 0; }
 .page-hero::after { z-index: 0; }
 .page-hero::before { z-index: 0; }
 .page-hero { background-image: linear-gradient(rgba(169,133,76,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(169,133,76,.035) 1px, transparent 1px), radial-gradient(circle at 87% 44%, rgba(169,133,76,.12), transparent 24%), linear-gradient(100deg, #e8dfd1, #faf7f0 59%, #e4d8c7); background-size: 32px 32px, 32px 32px, auto, auto; }
@@ -1003,6 +1012,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 }
 @media (max-width: 800px) {
   .main-nav { top: 96px; background: rgba(250,247,241,.985); border-bottom-color: rgba(169,133,76,.28); }
+  .greek-relief { width: 75%; height: 78px; }
   .main-nav button:not(.nav-cta) { color: #40383a; }
   .main-nav button:not(.nav-cta):hover, .main-nav button.active { color: var(--red); }
   .main-nav .theme-switch { margin: 14px 0 0; align-self: flex-start; }
@@ -1535,4 +1545,87 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+
+/* ==========================================================================
+   GREEK & SCIENTIFIC ADDITIONS — meander dividers, lineage, lexicon,
+   floating symbols, etymology notes, laurel wreath. All decorative layers
+   are aria-hidden and respect prefers-reduced-motion.
+   ========================================================================== */
+
+/* Meander divider */
+.meander-divider { display: flex; align-items: center; gap: 22px; padding: 6px 0; color: rgba(213,183,126,.42); }
+.meander-line { flex: 1; min-width: 0; display: block; overflow: hidden; }
+.meander-glyph { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; color: var(--gold-light); }
+.meander-glyph b { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(213,183,126,.55); border-radius: 50%; font: 500 20px var(--serif); background: rgba(213,183,126,.06); }
+.meander-glyph small { font: 7px var(--mono); letter-spacing: 1.8px; color: rgba(213,183,126,.7); white-space: nowrap; }
+
+/* Floating scientific symbols */
+.lineage-section, .about-mission-section, .lexicon-section { position: relative; }
+.floating-symbols { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.floating-symbols span { position: absolute; font-family: var(--serif); color: rgba(213,183,126,.08); animation: vx-drift ease-in-out infinite alternate; user-select: none; }
+.lineage-section > *:not(.floating-symbols), .about-mission-section > *:not(.floating-symbols) { position: relative; z-index: 1; }
+@keyframes vx-drift { from { transform: translate3d(0, 0, 0) rotate(-6deg); } to { transform: translate3d(14px, -26px, 0) rotate(8deg); } }
+
+/* Lineage of inquiry */
+.lineage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.lineage-card { position: relative; overflow: hidden; min-height: 210px; padding: 26px 25px 23px; border: 1px solid rgba(213,183,126,.22); background: linear-gradient(145deg, #1d1a21, #151318); transition: border-color .3s ease, box-shadow .3s ease; }
+.lineage-card:hover { border-color: rgba(213,183,126,.6); box-shadow: 0 18px 40px rgba(0,0,0,.28); }
+.lineage-glyph { position: absolute; right: 14px; top: -6px; color: rgba(213,183,126,.1); font: 112px/1 var(--serif); pointer-events: none; transition: color .3s ease, transform .4s ease; }
+.lineage-card:hover .lineage-glyph { color: rgba(213,183,126,.2); transform: translateY(6px) rotate(-4deg); }
+.lineage-card small { display: block; color: var(--gold-light); font: 800 7px var(--mono); letter-spacing: 1.6px; }
+.lineage-card h3 { position: relative; margin: 18px 0 0; color: #fff4e5; font: 600 23px var(--serif); }
+.lineage-card p { position: relative; margin: 9px 0 0; color: #c5baad; font-size: 11px; line-height: 1.85; }
+.lineage-note { margin: 26px 0 0; text-align: center; color: rgba(213,183,126,.6); font: 7px var(--mono); letter-spacing: 1.5px; }
+
+/* Lexicon (Greek roots of scientific words) */
+.lexicon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.lexicon-card { position: relative; overflow: hidden; padding: 28px 26px 24px; border: 1px solid rgba(213,183,126,.22); background: linear-gradient(145deg, #1d1a21, #151318); }
+.lexicon-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--red-bright), var(--gold-light)); }
+.lexicon-card strong { display: block; color: var(--gold-light); font: 500 25px var(--serif); letter-spacing: 2px; }
+.lexicon-card em { display: block; margin-top: 5px; color: #a79a89; font: 8px var(--mono); letter-spacing: 1.4px; font-style: normal; }
+.lexicon-card p { margin: 14px 0 0; color: #d8cdc0; font: italic 15px/1.5 var(--serif); }
+.lexicon-card > span { display: inline-block; margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(213,183,126,.18); color: #fff4e5; font: 800 8px var(--mono); letter-spacing: 1.8px; text-transform: uppercase; }
+
+/* Etymology on competition cards */
+.competition-etymon { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 2px 0 12px; padding: 7px 0; border-block: 1px dashed rgba(169,133,76,.4); }
+.competition-etymon b { color: var(--gold); font: 500 13px var(--serif); letter-spacing: 2px; }
+.competition-etymon small { color: var(--muted); font: 7px var(--mono); letter-spacing: 1px; }
+
+/* Page hero marginalia */
+.page-hero-note { position: absolute !important; right: 5%; bottom: 34px; z-index: 2; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; padding-top: 12px; border-top: 1px solid rgba(213,183,126,.4); color: var(--gold-light); text-align: right; }
+.page-hero-note b { font: 500 20px var(--serif); letter-spacing: 4px; }
+.page-hero-note span { font: 7px var(--mono); letter-spacing: 1.4px; color: rgba(213,183,126,.75); }
+
+/* Countdown Greek labels */
+.unit-greek { margin-top: 2px; color: rgba(213,183,126,.55); font: 6px var(--mono); letter-spacing: 1.2px; font-style: normal; }
+
+/* Eureka on the question orbit */
+.question-orbit { position: relative; }
+.question-eureka { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%) rotate(-4deg); color: rgba(255,244,229,.55); font: 500 12px var(--serif); letter-spacing: 5px; white-space: nowrap; }
+
+/* Laurel wreath on the prize card */
+.prize-total-card { position: relative; }
+.laurel-wreath { position: absolute; left: 22px; top: 50%; width: 176px; height: 176px; transform: translateY(-50%); color: rgba(213,183,126,.4); pointer-events: none; }
+
+/* Footer constants */
+.footer-constants i { color: var(--red-bright); font-style: normal; }
+
+@media (max-width: 1080px) {
+  .lineage-grid, .lexicon-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-hero-note { right: 4%; }
+}
+@media (max-width: 800px) {
+  .page-hero-note { position: relative !important; right: auto; bottom: auto; margin-top: 22px; align-items: flex-start; text-align: left; width: fit-content; }
+  .laurel-wreath { left: 50%; top: 22px; transform: translateX(-50%); width: 140px; height: 140px; opacity: .6; }
+  .meander-glyph small { display: none; }
+}
+@media (max-width: 540px) {
+  .lineage-grid, .lexicon-grid { grid-template-columns: 1fr; }
+  .meander-divider { gap: 12px; }
+  .unit-greek { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-symbols span { animation: none; }
 }

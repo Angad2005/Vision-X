@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 
-const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.prize-detail-card,.gallery-card,.schedule-item,.journey-card';
+const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.prize-detail-card,.gallery-card,.schedule-item,.journey-card,.lineage-card,.lexicon-card';
 const SCRAMBLE = '.page-hero-kicker,.eyebrow,.hero-pretitle,.hero-subtitle,.team-role,.competition-type,.gallery-card-copy>span,.hero-event-meta';
 const COUNT = '.prize-total-card>div>strong';
 const RIPPLE = '.button,.nav-cta,.competition-link,.faq-item>button,.gallery-filters button,.schedule-day-switch button,.footer-end>button';

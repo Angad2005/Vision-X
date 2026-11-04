@@ -82,6 +82,34 @@ const competitions = [
   },
 ];
 
+// Greek terms that sit behind each competition (shown subtly on the cards)
+const competitionGreek = {
+  '01': ['ΑΓΟΡΑ', 'agorá · the public square'],
+  '02': ['ΕΡΕΥΝΑ', 'érevna · research, search'],
+  '03': ['ΔΙΑΛΕΚΤΙΚΗ', 'dialektikí · the art of argument'],
+  '04': ['ΣΥΝΘΕΣΙΣ', 'sýnthesis · a putting together'],
+};
+
+// Greek words that became the vocabulary of science
+const lexicon = [
+  { greek: 'ΘΕΩΡΙΑ', roman: 'theōría', meaning: 'a looking at, contemplation', english: 'theory' },
+  { greek: 'ΥΠΟΘΕΣΙΣ', roman: 'hypóthesis', meaning: 'a foundation placed beneath', english: 'hypothesis' },
+  { greek: 'ΜΕΘΟΔΟΣ', roman: 'méthodos', meaning: 'a way of pursuing', english: 'method' },
+  { greek: 'ΑΝΑΛΥΣΙΣ', roman: 'análysis', meaning: 'a loosening up, unravelling', english: 'analysis' },
+  { greek: 'ΣΥΝΘΕΣΙΣ', roman: 'sýnthesis', meaning: 'a putting together', english: 'synthesis' },
+  { greek: 'ΑΛΗΘΕΙΑ', roman: 'alḗtheia', meaning: 'that which is un-concealed', english: 'truth' },
+];
+
+// A lineage of inquiry (dates approximate)
+const lineage = [
+  { name: 'Thales of Miletus', era: 'c. 624–546 BCE', glyph: 'Θ', text: 'Looked for natural explanations of the world rather than mythical ones.' },
+  { name: 'Hippocrates', era: 'c. 460–370 BCE', glyph: 'Ι', text: 'Associated with careful observation and recorded case-notes in medicine.' },
+  { name: 'Aristotle', era: '384–322 BCE', glyph: 'Α', text: 'Observed, described and classified living things in a systematic way.' },
+  { name: 'Euclid', era: 'c. 300 BCE', glyph: 'Ε', text: 'His Elements showed how geometry can be built from definitions and proofs.' },
+  { name: 'Archimedes', era: 'c. 287–212 BCE', glyph: 'Ψ', text: 'Brought mathematics to mechanics, levers and the physics of floating bodies.' },
+  { name: 'Eratosthenes', era: 'c. 276–194 BCE', glyph: 'Ρ', text: 'Estimated the circumference of the Earth using shadows and geometry.' },
+];
+
 const teamGroups = [
   {
     id: 'core', eyebrow: 'CORE LEADERSHIP', title: 'The Visionaries', members: [
@@ -164,6 +192,67 @@ function BrandLogo({ alt = '' }) {
 
 function GreekKey({ className = '' }) {
   return <div className={`greek-key ${className}`} aria-hidden="true"><span /></div>;
+}
+
+// Meander (Greek key) divider drawn as SVG, with a centre glyph
+function MeanderDivider({ glyph = 'Φ', label }) {
+  const id = React.useId().replace(/:/g, '');
+  return (
+    <div className="meander-divider shell" aria-hidden="true">
+      <svg className="meander-line" height="14" width="100%" preserveAspectRatio="none">
+        <defs>
+          <pattern id={`mea-${id}`} width="28" height="14" patternUnits="userSpaceOnUse">
+            <path d="M1 13V1H27V13H9V5H19V9H14" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="14" fill={`url(#mea-${id})`} />
+      </svg>
+      <span className="meander-glyph"><b>{glyph}</b>{label && <small>{label}</small>}</span>
+      <svg className="meander-line" height="14" width="100%" preserveAspectRatio="none">
+        <rect width="100%" height="14" fill={`url(#mea-${id})`} />
+      </svg>
+    </div>
+  );
+}
+
+// Slowly drifting mathematical / scientific symbols (purely decorative)
+const SYMBOLS = ['π', 'Σ', '∇', 'λ', 'Δ', '∞', 'Ω', '∂', 'φ', 'θ', '∫', 'ψ'];
+function FloatingSymbols({ count = 8 }) {
+  const items = useMemo(() => Array.from({ length: count }, (_, i) => ({
+    char: SYMBOLS[(i * 5 + 2) % SYMBOLS.length],
+    left: `${(i * 37 + 8) % 92}%`,
+    top: `${(i * 53 + 12) % 82}%`,
+    size: 20 + ((i * 13) % 30),
+    dur: 14 + ((i * 7) % 12),
+    delay: -((i * 3) % 10),
+  })), [count]);
+  return (
+    <div className="floating-symbols" aria-hidden="true">
+      {items.map((it, i) => (
+        <span key={i} style={{ left: it.left, top: it.top, fontSize: it.size, animationDuration: `${it.dur}s`, animationDelay: `${it.delay}s` }}>{it.char}</span>
+      ))}
+    </div>
+  );
+}
+
+// Laurel wreath mark for the prizes page
+function LaurelWreath() {
+  const leaves = Array.from({ length: 9 }, (_, i) => i);
+  return (
+    <svg className="laurel-wreath" viewBox="0 0 200 200" aria-hidden="true">
+      {[1, -1].map((dir) => (
+        <g key={dir} transform={dir === -1 ? 'translate(200 0) scale(-1 1)' : undefined} fill="none" stroke="currentColor" strokeWidth="1.1">
+          <path d="M100 178C52 168 26 132 26 92C26 62 40 38 62 24" />
+          {leaves.map((i) => {
+            const t = i / 8;
+            const x = 100 - 74 * Math.sin(t * 1.35);
+            const y = 178 - 154 * t;
+            return <ellipse key={i} cx={x - 8} cy={y} rx="11" ry="4.6" transform={`rotate(${-30 - t * 40} ${x - 8} ${y})`} />;
+          })}
+        </g>
+      ))}
+    </svg>
+  );
 }
 
 // Enhanced Section Heading
@@ -433,10 +522,10 @@ function Countdown() {
 
   const remaining = Math.max(0, EVENT_START.getTime() - now);
   const units = [
-    ['DAYS', Math.floor(remaining / 86400000)],
-    ['HOURS', Math.floor((remaining / 3600000) % 24)],
-    ['MINUTES', Math.floor((remaining / 60000) % 60)],
-    ['SECONDS', Math.floor((remaining / 1000) % 60)],
+    ['DAYS', Math.floor(remaining / 86400000), 'ΗΜΕΡΕΣ'],
+    ['HOURS', Math.floor((remaining / 3600000) % 24), 'ΩΡΕΣ'],
+    ['MINUTES', Math.floor((remaining / 60000) % 60), 'ΛΕΠΤΑ'],
+    ['SECONDS', Math.floor((remaining / 1000) % 60), 'ΔΕΥΤΕΡΟΛΕΠΤΑ'],
   ];
 
   const eventOver = now >= EVENT_END.getTime();
@@ -464,8 +553,8 @@ function Countdown() {
         </motion.div>
       ) : (
         <div className="countdown-units">
-          {units.map(([label, value]) => (
-            <FlipUnit key={label} label={label} value={value} />
+          {units.map(([label, value, greek]) => (
+            <FlipUnit key={label} label={label} value={value} greek={greek} />
           ))}
         </div>
       )}
@@ -473,7 +562,7 @@ function Countdown() {
   );
 }
 
-function FlipUnit({ label, value }) {
+function FlipUnit({ label, value, greek }) {
   const displayValue = String(value).padStart(2, '0');
   
   return (
@@ -491,6 +580,7 @@ function FlipUnit({ label, value }) {
         </motion.strong>
       </AnimatePresence>
       <span>{label}</span>
+      {greek && <em className="unit-greek" aria-hidden="true">{greek}</em>}
     </div>
   );
 }
@@ -561,6 +651,7 @@ function HomePage({ onNavigate }) {
             <span>IDEAS IN MOTION</span>
             <span>EST. MMXXVI</span>
           </div>
+          <div className="greek-relief" aria-hidden="true" />
         </div>
         <div className="hero-bottom-rule"><GreekKey /></div>
       </section>
@@ -602,6 +693,34 @@ function HomePage({ onNavigate }) {
             DISCOVER THE VISION <ArrowUpRight size={15} />
           </MagneticButton>
         </div>
+      </section>
+
+      <MeanderDivider glyph="Σ" label="ΙΣΤΟΡΙΑ · INQUIRY" />
+
+      <section className="section-block shell lineage-section" aria-labelledby="lineage-title">
+        <FloatingSymbols count={7} />
+        <SectionHeading
+          eyebrow="ΙΣΤΟΡΙΑ · A LINEAGE OF INQUIRY"
+          title={<span id="lineage-title">Standing on <em>ancient shoulders.</em></span>}
+          text="Many habits of modern research — observing, measuring, proving, classifying — were sharpened by thinkers of the ancient Greek world. VISION X carries that tradition forward."
+        />
+        <motion.div
+          className="lineage-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerContainer}
+        >
+          {lineage.map((p, i) => (
+            <motion.article className="lineage-card" key={p.name} variants={scaleIn} whileHover={{ y: -6 }}>
+              <span className="lineage-glyph" aria-hidden="true">{p.glyph}</span>
+              <small>0{i + 1} · {p.era}</small>
+              <h3>{p.name}</h3>
+              <p>{p.text}</p>
+            </motion.article>
+          ))}
+        </motion.div>
+        <p className="lineage-note">Dates are approximate · ΕΥΡΗΚΑ — “I have found it”, attributed to Archimedes</p>
       </section>
 
       <section className="blueprint-section research-atlas" aria-labelledby="research-atlas-title">
@@ -683,6 +802,7 @@ function HomePage({ onNavigate }) {
           >
             <span>?</span>
             <i />
+            <b className="question-eureka">ΕΥΡΗΚΑ!</b>
           </motion.div>
           <motion.div
             className="question-copy"
@@ -710,7 +830,7 @@ function HomePage({ onNavigate }) {
 }
 
 // Page Hero Component
-function PageHero({ kicker, title, description, footer }) {
+function PageHero({ kicker, title, description, footer, note }) {
   return (
     <motion.section
       className="page-hero shell"
@@ -718,6 +838,7 @@ function PageHero({ kicker, title, description, footer }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.65 }}
     >
+      <div className="greek-relief" aria-hidden="true" />
       <div className="page-hero-kicker"><span /> {kicker}</div>
       <h1>{title}</h1>
       <p>{description}</p>
@@ -725,6 +846,12 @@ function PageHero({ kicker, title, description, footer }) {
         <span>{footer}</span>
         <ArrowDown size={16} />
       </div>
+      {note && (
+        <div className="page-hero-note" aria-hidden="true">
+          <b>{note[0]}</b>
+          <span>{note[1]}</span>
+        </div>
+      )}
     </motion.section>
   );
 }
@@ -738,6 +865,7 @@ function AboutPage() {
         title={<>Beyond boundaries. <br /><em>Beyond ordinary.</em></>}
         description="From Curiosity to Impact — a research and ideas-led gathering at Chitkara University, Punjab."
         footer="27–28 NOVEMBER 2026 · CHITKARA UNIVERSITY"
+        note={['ΕΠΙΣΤΗΜΗ', 'epistḗmē · knowledge that can be justified']}
       />
       <section className="section-block shell about-overview">
         <SectionHeading
@@ -775,7 +903,32 @@ function AboutPage() {
           </motion.article>
         </motion.div>
       </section>
+      <MeanderDivider glyph="Λ" label="ΛΟΓΟΣ · WORD & REASON" />
+      <section className="section-block shell lexicon-section">
+        <SectionHeading
+          eyebrow="ΛΕΞΙΚΟΝ · THE LANGUAGE OF SCIENCE"
+          title={<>Words we <em>inherited.</em></>}
+          text="Much of the vocabulary of research comes straight from Greek. Every time you form a hypothesis or run an analysis, you are speaking it."
+        />
+        <motion.div
+          className="lexicon-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerContainer}
+        >
+          {lexicon.map((w) => (
+            <motion.article className="lexicon-card" key={w.english} variants={fadeInUp} whileHover={{ y: -5 }}>
+              <strong lang="el">{w.greek}</strong>
+              <em>{w.roman}</em>
+              <p>“{w.meaning}”</p>
+              <span>→ {w.english}</span>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
       <section className="about-mission-section">
+        <FloatingSymbols count={6} />
         <div className="shell mission-grid">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -847,6 +1000,7 @@ function CompetitionsPage({ onNavigate }) {
         title={<>Four arenas. <br /><em>One curious mind.</em></>}
         description="Talks, research communication, debate and an overnight academic writing challenge."
         footer="04 COMPETITIONS · 27–28 NOVEMBER 2026"
+        note={['ΑΓΩΝ', 'agṓn · a contest, a gathering']}
       />
       <section className="section-block shell compact-top">
         <div className="competition-intro">
@@ -888,6 +1042,10 @@ function CompetitionsPage({ onNavigate }) {
                 <div className="competition-content">
                   <span className="competition-type">{item.type}</span>
                   <h3>{item.name}</h3>
+                  <div className="competition-etymon" aria-hidden="true">
+                    <b>{competitionGreek[item.number][0]}</b>
+                    <small>{competitionGreek[item.number][1]}</small>
+                  </div>
                   <p>{item.description}</p>
                   <div className="competition-meta">
                     <span><Sparkles size={13} /> {item.detail}</span>
@@ -947,6 +1105,7 @@ function SchedulePage() {
         title={<>Two days. <br /><em>Many perspectives.</em></>}
         description="An interactive overview of the two-day VISION X programme. Detailed timings, venues, sessions, competition slots and breaks will be published once finalised."
         footer="27 NOVEMBER · 28 NOVEMBER 2026"
+        note={['ΧΡΟΝΟΣ', 'chrónos · time']}
       />
       <section className="section-block shell schedule-section">
         <SectionHeading
@@ -1046,6 +1205,7 @@ function PrizesPage() {
         title={<>Celebrate the work. <br /><em>Recognise the ideas.</em></>}
         description="A platform to recognise curiosity, research communication and thoughtful participation."
         footer="TOTAL PRIZE POOL · 30K"
+        note={['ΝΙΚΗ', 'níkē · victory']}
       />
       <section className="section-block shell prize-section">
         <motion.div
@@ -1063,6 +1223,7 @@ function PrizesPage() {
           >
             <Trophy size={48} strokeWidth={1.1} />
           </motion.div>
+          <LaurelWreath />
           <div>
             <span className="eyebrow"><span /> VISION X 2026</span>
             <motion.strong
@@ -1123,6 +1284,7 @@ function GalleryPage() {
         title={<>Ideas leave a trace. <br /><em>Moments tell stories.</em></>}
         description="Photographs, videos, behind-the-scenes moments and event updates will be collected here."
         footer="THE VISION X ARCHIVE · 2026"
+        note={['ΕΙΚΩΝ', 'eikṓn · an image, a likeness']}
       />
       <section className="section-block shell gallery-section">
         <SectionHeading
@@ -1244,6 +1406,7 @@ function TeamPage() {
         title={<>Made by people. <br /><em>Built on belief.</em></>}
         description="Meet the organizing committee, leadership, department heads and the people working behind the scenes. Faculty coordinator and volunteer information will be added when confirmed."
         footer="THE VISIONARIES · THE EXECUTORS · THE BUILDERS"
+        note={['ΣΥΝΕΡΓΙΑ', 'synergía · working together']}
       />
       {teamGroups.map((group, groupIndex) => (
         <motion.section
@@ -1325,6 +1488,7 @@ function ContactPage() {
         title={<>Find your way. <br /><em>Get in touch.</em></>}
         description="Event information for participants, researchers, speakers and visitors."
         footer="CHITKARA UNIVERSITY · PUNJAB"
+        note={['ΔΙΑΛΟΓΟΣ', 'diálogos · conversation through reason']}
       />
       <section className="section-block shell contact-layout">
         <motion.div
@@ -1428,6 +1592,7 @@ function RegisterPage() {
         title={<>Step into <br /><em>the vision.</em></>}
         description="Your next idea could become your biggest impact. Take the first step."
         footer="VISION X 2026 · 27–28 NOVEMBER"
+        note={['ΑΡΧΗ', 'archḗ · the beginning']}
       />
       <section className="section-block shell compact-top registration-section">
         <motion.div
@@ -1558,7 +1723,7 @@ function Footer({ onNavigate }) {
       </div>
       <div className="footer-bottom shell">
         <span>VISION X <i>·</i> 2026</span>
-        <span>QUESTION. INVESTIGATE. CREATE.</span>
+        <span className="footer-constants">π 3.14159 <i>·</i> φ 1.61803 <i>·</i> e 2.71828 <i>·</i> ΠΑΝΤΑ ΡΕΙ</span>
         <motion.button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           whileHover={{ y: -2 }}
