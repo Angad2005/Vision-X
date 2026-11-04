@@ -18,6 +18,7 @@ const FxExtras = lazy(() => import('./FxExtras.jsx'));
 // Paste the public Google Form URL here (forms.gle or docs.google.com/forms/.../viewform).
 const REGISTRATION_URL = 'https://forms.gle/YOUR_FORM_ID';
 const REGISTRATION_QR_SRC = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=12&ecc=M&color=941f30&bgcolor=fffaf1&data=${encodeURIComponent(REGISTRATION_URL)}`;
+const VISION_X_LOGO_SRC = '/images/WhatsApp%20Image%202026-11-04%20at%2011.19.35%20PM.jpeg';
 
 function openRegistrationForm() {
   window.open(REGISTRATION_URL, '_blank', 'noopener,noreferrer');
@@ -147,18 +148,17 @@ function MagneticButton({ children, className, onClick, strength = 0.3, ...props
   );
 }
 
-// Enhanced Brand Mark
-function BrandMark() {
+function BrandLogo({ alt = '' }) {
   return (
-    <motion.span 
-      className="brand-mark" 
-      aria-hidden="true"
-      whileHover={{ rotate: -8, scale: 1.05 }}
+    <motion.img
+      className="brand-logo"
+      src={VISION_X_LOGO_SRC}
+      alt={alt}
+      aria-hidden={alt ? undefined : true}
+      whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
-      <span>V</span>
-      <i>X</i>
-    </motion.span>
+    </motion.img>
   );
 }
 
@@ -226,8 +226,7 @@ function Header({ activePage, onNavigate }) {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <BrandMark />
-          <span className="brand-word">VISION <b>X</b> <small>CHITKARA RESEARCH CLUB</small></span>
+          <BrandLogo alt="Vision X" />
         </motion.button>
 
         <motion.button 
@@ -711,7 +710,7 @@ function HomePage({ onNavigate }) {
 }
 
 // Page Hero Component
-function PageHero({ kicker, title, description, footer, index }) {
+function PageHero({ kicker, title, description, footer }) {
   return (
     <motion.section
       className="page-hero shell"
@@ -726,7 +725,6 @@ function PageHero({ kicker, title, description, footer, index }) {
         <span>{footer}</span>
         <ArrowDown size={16} />
       </div>
-      <div className="page-hero-watermark">{index}</div>
     </motion.section>
   );
 }
@@ -740,7 +738,6 @@ function AboutPage() {
         title={<>Beyond boundaries. <br /><em>Beyond ordinary.</em></>}
         description="From Curiosity to Impact — a research and ideas-led gathering at Chitkara University, Punjab."
         footer="27–28 NOVEMBER 2026 · CHITKARA UNIVERSITY"
-        index="02"
       />
       <section className="section-block shell about-overview">
         <SectionHeading
@@ -850,7 +847,6 @@ function CompetitionsPage({ onNavigate }) {
         title={<>Four arenas. <br /><em>One curious mind.</em></>}
         description="Talks, research communication, debate and an overnight academic writing challenge."
         footer="04 COMPETITIONS · 27–28 NOVEMBER 2026"
-        index="03"
       />
       <section className="section-block shell compact-top">
         <div className="competition-intro">
@@ -951,7 +947,6 @@ function SchedulePage() {
         title={<>Two days. <br /><em>Many perspectives.</em></>}
         description="An interactive overview of the two-day VISION X programme. Detailed timings, venues, sessions, competition slots and breaks will be published once finalised."
         footer="27 NOVEMBER · 28 NOVEMBER 2026"
-        index="04"
       />
       <section className="section-block shell schedule-section">
         <SectionHeading
@@ -1051,7 +1046,6 @@ function PrizesPage() {
         title={<>Celebrate the work. <br /><em>Recognise the ideas.</em></>}
         description="A platform to recognise curiosity, research communication and thoughtful participation."
         footer="TOTAL PRIZE POOL · 30K"
-        index="05"
       />
       <section className="section-block shell prize-section">
         <motion.div
@@ -1129,7 +1123,6 @@ function GalleryPage() {
         title={<>Ideas leave a trace. <br /><em>Moments tell stories.</em></>}
         description="Photographs, videos, behind-the-scenes moments and event updates will be collected here."
         footer="THE VISION X ARCHIVE · 2026"
-        index="06"
       />
       <section className="section-block shell gallery-section">
         <SectionHeading
@@ -1251,7 +1244,6 @@ function TeamPage() {
         title={<>Made by people. <br /><em>Built on belief.</em></>}
         description="Meet the organizing committee, leadership, department heads and the people working behind the scenes. Faculty coordinator and volunteer information will be added when confirmed."
         footer="THE VISIONARIES · THE EXECUTORS · THE BUILDERS"
-        index="07"
       />
       {teamGroups.map((group, groupIndex) => (
         <motion.section
@@ -1333,7 +1325,6 @@ function ContactPage() {
         title={<>Find your way. <br /><em>Get in touch.</em></>}
         description="Event information for participants, researchers, speakers and visitors."
         footer="CHITKARA UNIVERSITY · PUNJAB"
-        index="08"
       />
       <section className="section-block shell contact-layout">
         <motion.div
@@ -1437,7 +1428,6 @@ function RegisterPage() {
         title={<>Step into <br /><em>the vision.</em></>}
         description="Your next idea could become your biggest impact. Take the first step."
         footer="VISION X 2026 · 27–28 NOVEMBER"
-        index="09"
       />
       <section className="section-block shell compact-top registration-section">
         <motion.div
@@ -1447,14 +1437,10 @@ function RegisterPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="registration-seal"
-            animate={{ rotate: [0, 5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <BrandMark />
+          <div className="registration-logo">
+            <BrandLogo alt="Vision X" />
             <span>VISION X<br />2026</span>
-          </motion.div>
+          </div>
           <span className="eyebrow"><span /> OFFICIAL REGISTRATION</span>
           <h2>One step closer <br />to <em>what's next.</em></h2>
           <p>Register for VISION X 2026 with the button or QR code. The event will take place on 27–28 November 2026 at Chitkara University, Punjab.</p>
@@ -1538,8 +1524,7 @@ function Footer({ onNavigate }) {
       <div className="shell footer-main">
         <div className="footer-brand">
           <div className="footer-logo">
-            <BrandMark />
-            <span>VISION <b>X</b></span>
+            <BrandLogo alt="Vision X" />
           </div>
           <p>FROM CURIOSITY TO IMPACT</p>
           <small>A flagship initiative by Chitkara Research Club.</small>

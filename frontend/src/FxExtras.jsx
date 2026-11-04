@@ -46,7 +46,29 @@ function Curtain() {
   if (!k) return null;
   return (
     <motion.div key={k} className="fx-curtain" initial={{ scaleY: 0, originY: 1 }} animate={{ scaleY: [0, 1, 1, 0], originY: [1, 1, 0, 0] }} transition={{ duration: 1.05, times: [0, 0.4, 0.55, 1], ease: 'easeInOut' }}>
-      <span>VISION <b>X</b></span>
+      <div className="fx-curtain-word" aria-label="Vision X">
+        {'VISION'.split('').map((letter, index) => (
+          <motion.span
+            key={`${letter}-${index}`}
+            className="fx-curtain-letter"
+            aria-hidden="true"
+            initial={{ opacity: 0, y: 22, rotateX: -45, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
+            transition={{ delay: 0.1 + index * 0.045, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {letter}
+          </motion.span>
+        ))}
+        <motion.b
+          className="fx-curtain-x"
+          aria-hidden="true"
+          initial={{ opacity: 0, y: 18, scale: 1.5, rotate: -25, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, scale: 1, rotate: 0, filter: 'blur(0px)' }}
+          transition={{ delay: 0.4, duration: 0.5, type: 'spring', stiffness: 180, damping: 16 }}
+        >
+          X
+        </motion.b>
+      </div>
     </motion.div>
   );
 }
