@@ -239,11 +239,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 .emblem-coordinate { position: absolute; left: 22px; bottom: 57px; color: rgba(213,183,126,.48); font: 7px var(--mono); letter-spacing: 1px; writing-mode: vertical-rl; }
 
 /* Marquee ----------------------------------------------------------------- */
-.marquee-band { position: relative; z-index: 4; overflow: hidden; padding: 15px 0; background: linear-gradient(100deg, #761726, #a02435 54%, #701624); color: white; transform: rotate(-.65deg) scale(1.02); border-top: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(0,0,0,.28); }
-.marquee-track { width: max-content; display: flex; align-items: center; gap: 36px; animation: marquee 36s linear infinite; font-size: 9px; letter-spacing: 2.3px; font-weight: 800; }
-.marquee-track > span { display: inline-flex; align-items: center; gap: 32px; white-space: nowrap; }
-.marquee-track b { color: var(--gold-light); font-size: 13px; }
-@keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes goldSweep { 0%, 15% { transform: translateX(-150%) skewX(-18deg); } 58%, 100% { transform: translateX(370%) skewX(-18deg); } }
 
 /* Section foundations ----------------------------------------------------- */
@@ -485,7 +480,13 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 .form-panel-head h3 { margin: 4px 0 0; color: #f8f1e7; font-family: var(--serif); font-size: 22px; font-weight: 600; }
 .form-live { display: flex; align-items: center; gap: 8px; color: #d8cbb9; font: 800 7px var(--mono); letter-spacing: 1.3px; }
 .form-live i { background: #84bb8e; box-shadow: 0 0 0 3px rgba(132,187,142,.12); }
-.registration-form-panel iframe { display: block; width: 100%; min-height: 1280px; border: 0; background: #fff; }
+.registration-cta { display: grid; justify-items: center; gap: 22px; padding: 36px 28px 40px; text-align: center; background: linear-gradient(180deg, #fffdf8, #f3ece2); }
+.registration-cta > p { max-width: 34ch; margin: 0; color: #766d67; font-size: 11px; line-height: 1.8; }
+.registration-cta .button { width: min(100%, 280px); }
+.registration-qr { margin: 0; display: grid; justify-items: center; gap: 12px; }
+.registration-qr a { display: block; padding: 14px; border: 1px solid rgba(169,133,76,.45); border-radius: 10px; background: #fffaf1; box-shadow: 0 10px 28px rgba(43,31,29,.08); }
+.registration-qr img { display: block; width: 220px; height: 220px; }
+.registration-qr figcaption { color: #9c8155; font: 800 7px var(--mono); letter-spacing: 1.6px; }
 
 /* Footer ------------------------------------------------------------------ */
 .site-footer { position: relative; padding-top: 70px; background: #09090c; border-top: 1px solid rgba(213,183,126,.2); }
@@ -602,9 +603,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
   .hero-emblem { height: 315px; margin-bottom: -72px; transform: scale(.6); transform-origin: center top; }
   .hero-index { font-size: 6px; gap: 7px; }
   .hero-index-greek { display: none; }
-  .marquee-band { padding: 12px 0; }
-  .marquee-track { gap: 20px; font-size: 7px; }
-  .marquee-track > span { gap: 19px; }
   .section-block { padding-top: 70px; padding-bottom: 70px; }
   .section-heading { margin-bottom: 34px; }
   .section-heading h2, .question-copy h2 { font-size: 44px; }
@@ -679,7 +677,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
   .team-socials > span { width: 20px; height: 20px; }
   .team-socials small { font-size: 5px; }
   .registration-aside h2 { font-size: 43px; }
-  .registration-form-panel iframe { min-height: 1450px; }
   .footer-main { grid-template-columns: 1fr; gap: 29px; padding-bottom: 35px; }
   .footer-brand { grid-column: auto; }
   .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px; }
@@ -886,6 +883,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 .app-shell[data-theme="dark"] .registration-aside-seal { color: var(--gold-light); }
 .app-shell[data-theme="dark"] .registration-aside-seal { border-top-color: rgba(224,193,139,.25); }
 .app-shell[data-theme="dark"] .registration-form-panel { border-color: rgba(224,193,139,.6); }
+.app-shell[data-theme="dark"] .registration-cta { background: linear-gradient(180deg, #1c1920, #151319); }
+.app-shell[data-theme="dark"] .registration-cta > p { color: #d0c6bb; }
+.app-shell[data-theme="dark"] .registration-qr a { border-color: rgba(224,193,139,.45); background: #fffaf1; }
+.app-shell[data-theme="dark"] .registration-qr figcaption { color: var(--gold-light); }
 .app-shell[data-theme="dark"] .question-section { background: radial-gradient(circle at 90% 20%, rgba(224,193,139,.13), transparent 28%), linear-gradient(110deg, #651523, #941f30 56%, #54131f); }
 .app-shell[data-theme="dark"] .journey-process { background: #1a171d; }
 .app-shell[data-theme="dark"] .site-footer { border-top-color: rgba(224,193,139,.25); }
@@ -915,6 +916,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
   .contact-info-list strong,
   .faq-answer p,
   .registration-aside > p,
+  .registration-cta > p,
   .registration-note,
   .footer-brand > small,
   .footer-links button
@@ -1002,6 +1004,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     .contact-info-list strong,
     .faq-answer p,
     .registration-aside > p,
+    .registration-cta > p,
     .registration-note,
     .footer-brand > small,
     .footer-links button

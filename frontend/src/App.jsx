@@ -15,7 +15,13 @@ import {
 const FxLayer = lazy(() => import('./FxLayer.jsx'));
 const FxExtras = lazy(() => import('./FxExtras.jsx'));
 
-const REGISTRATION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeRRYvEvsRPbAGpI4_kbA1mKIAw-T3loL5laZqqRAzlr5JH1A/viewform?embedded=true';
+// Paste the public Google Form URL here (forms.gle or docs.google.com/forms/.../viewform).
+const REGISTRATION_URL = 'https://forms.gle/YOUR_FORM_ID';
+const REGISTRATION_QR_SRC = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=12&ecc=M&color=941f30&bgcolor=fffaf1&data=${encodeURIComponent(REGISTRATION_URL)}`;
+
+function openRegistrationForm() {
+  window.open(REGISTRATION_URL, '_blank', 'noopener,noreferrer');
+}
 const EVENT_START = new Date('2026-11-27T00:00:00+05:30');
 const EVENT_END = new Date('2026-11-29T00:00:00+05:30');
 const PAGES = ['home', 'about', 'competitions', 'schedule', 'prizes', 'gallery', 'team', 'contact', 'register'];
@@ -582,14 +588,6 @@ function HomePage({ onNavigate }) {
         </div>
         <div className="hero-bottom-rule"><GreekKey /></div>
       </section>
-
-      <div className="marquee-band">
-        <div className="marquee-track">
-          {['QUESTION EVERYTHING', 'RESEARCH BRAVELY', 'BUILD WHAT MATTERS', 'FROM CURIOSITY TO IMPACT', 'QUESTION EVERYTHING', 'RESEARCH BRAVELY', 'BUILD WHAT MATTERS', 'FROM CURIOSITY TO IMPACT'].map((word, index) => (
-            <span key={`${word}-${index}`}>{word}<b>✳</b></span>
-          ))}
-        </div>
-      </div>
 
       <section className="section-block shell home-intro-section">
         <SectionHeading
@@ -1482,7 +1480,7 @@ function RegisterPage() {
           </motion.div>
           <span className="eyebrow"><span /> OFFICIAL REGISTRATION</span>
           <h2>One step closer <br />to <em>what's next.</em></h2>
-          <p>Complete the registration form for VISION X 2026. The event will take place on 27–28 November 2026 at Chitkara University, Punjab.</p>
+          <p>Register for VISION X 2026 with the button or QR code. The event will take place on 27–28 November 2026 at Chitkara University, Punjab.</p>
           <div className="registration-note">
             <Check size={16} />
             <span>Chitkara Research Club event</span>
@@ -1509,16 +1507,35 @@ function RegisterPage() {
               <h3>Participant registration</h3>
             </div>
             <span className="form-live">
-              <i /> REGISTRATION FORM
+              <i /> OPEN NOW
             </span>
           </div>
-          <iframe
-            src={REGISTRATION_URL}
-            title="VISION X 2026 Registration Form"
-            loading="lazy"
-          >
-            Loading registration form...
-          </iframe>
+          <div className="registration-cta">
+            <p>Use the official Google Form to submit your registration, or scan the QR code from your phone.</p>
+            <MagneticButton
+              className="button button-primary"
+              onClick={openRegistrationForm}
+              strength={0.25}
+            >
+              REGISTER NOW <ArrowUpRight size={16} />
+            </MagneticButton>
+            <figure className="registration-qr">
+              <a
+                href={REGISTRATION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open VISION X 2026 registration form"
+              >
+                <img
+                  src={REGISTRATION_QR_SRC}
+                  alt="QR code linking to the VISION X 2026 Google Form"
+                  width="220"
+                  height="220"
+                />
+              </a>
+              <figcaption>SCAN TO REGISTER</figcaption>
+            </figure>
+          </div>
         </motion.div>
       </section>
     </main>

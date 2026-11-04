@@ -61,25 +61,6 @@ function Particles() {
   return <canvas ref={ref} className="fx-particles" aria-hidden="true" />;
 }
 
-function Cursor() {
-  const dot = useRef(null), ring = useRef(null);
-  useEffect(() => {
-    if (!fine() || calm()) return;
-    const t = { x: innerWidth / 2, y: innerHeight / 2 }, r = { ...t };
-    let raf;
-    const move = (e) => {
-      t.x = e.clientX; t.y = e.clientY;
-      dot.current.style.transform = `translate(${t.x}px,${t.y}px)`;
-      ring.current.classList.toggle('is-hot', !!e.target.closest('button,a,input,iframe'));
-    };
-    const loop = () => { r.x += (t.x - r.x) * .16; r.y += (t.y - r.y) * .16; ring.current.style.transform = `translate(${r.x}px,${r.y}px)`; raf = requestAnimationFrame(loop); };
-    loop(); addEventListener('pointermove', move);
-    return () => { cancelAnimationFrame(raf); removeEventListener('pointermove', move); };
-  }, []);
-  if (typeof window !== 'undefined' && !fine()) return null;
-  return <><div ref={ring} className="fx-ring" /><div ref={dot} className="fx-dot" /></>;
-}
-
 function useInteractions() {
   useEffect(() => {
     if (!fine() || calm()) return;
@@ -115,7 +96,6 @@ export default function FxLayer() {
       <AnimatePresence>{intro && <Intro onDone={done} />}</AnimatePresence>
       <motion.div className="fx-progress" style={{ scaleX }} />
       <Particles />
-      <Cursor />
     </>
   );
 }
