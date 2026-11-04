@@ -7,7 +7,7 @@ import {
   ArrowDown, ArrowRight, ArrowUpRight, Atom, Award, BookOpen, BookText,
   CalendarDays, Check, ChevronDown, ChevronRight, Clock3, FlaskConical,
   HelpCircle, Image as ImageIcon, Instagram, Landmark, Mail, MapPin, Menu,
-  Mic2, Microscope, Moon, Network, Presentation, RadioTower, Sun, Trophy,
+  Mic2, Microscope, Network, Presentation, RadioTower, Trophy,
   Users, Video, X, MessagesSquare, Medal, Sparkles,
 } from 'lucide-react';
 
@@ -186,7 +186,7 @@ function SectionHeading({ eyebrow, title, text, align = 'center' }) {
 }
 
 // Enhanced Header with scroll-aware behavior
-function Header({ activePage, onNavigate, theme, onSelectTheme }) {
+function Header({ activePage, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -317,29 +317,6 @@ function Header({ activePage, onNavigate, theme, onSelectTheme }) {
           >
             REGISTER <ArrowUpRight size={14} />
           </MagneticButton>
-
-          <div className="theme-switch" role="group" aria-label="Choose colour theme">
-            <motion.button
-              type="button"
-              className={theme === 'light' ? 'is-active' : ''}
-              onClick={() => onSelectTheme('light')}
-              aria-pressed={theme === 'light'}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Sun size={14} /> <span>LIGHT</span>
-            </motion.button>
-            <motion.button
-              type="button"
-              className={theme === 'dark' ? 'is-active' : ''}
-              onClick={() => onSelectTheme('dark')}
-              aria-pressed={theme === 'dark'}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Moon size={14} /> <span>DARK</span>
-            </motion.button>
-          </div>
         </motion.nav>
       </div>
       <div className="header-ornament">
@@ -1618,21 +1595,11 @@ export default function App() {
 
   const [activePage, setActivePage] = useState(getInitialPage);
   const [showTop, setShowTop] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    try {
-      return window.localStorage.getItem('vision-x-theme') === 'dark' ? 'dark' : 'light';
-    } catch {
-      return 'light';
-    }
-  });
 
   useEffect(() => {
-    try {
-      window.localStorage.setItem('vision-x-theme', theme);
-    } catch { /* Theme remains active for this session. */ }
-    document.documentElement.style.colorScheme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#111014' : '#f2eee7');
-  }, [theme]);
+    document.documentElement.style.colorScheme = 'dark';
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#111014');
+  }, []);
 
   const navigate = (page) => {
     if (!PAGES.includes(page)) return;
@@ -1661,12 +1628,12 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="app-shell" data-theme={theme}>
+      <div className="app-shell" data-theme="dark">
         <Suspense fallback={null}>
           <FxLayer />
           <FxExtras />
         </Suspense>
-        <Header activePage={activePage} onNavigate={navigate} theme={theme} onSelectTheme={setTheme} />
+        <Header activePage={activePage} onNavigate={navigate} />
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             className="page-stage"

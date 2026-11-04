@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.prize-detail-card,.gallery-card,.schedule-item,.journey-card';
 const SCRAMBLE = '.page-hero-kicker,.eyebrow,.hero-pretitle,.hero-subtitle,.team-role,.competition-type,.gallery-card-copy>span,.hero-event-meta';
 const COUNT = '.prize-total-card>div>strong';
-const RIPPLE = '.button,.nav-cta,.competition-link,.faq-item>button,.gallery-filters button,.schedule-day-switch button,.theme-switch button,.footer-end>button';
+const RIPPLE = '.button,.nav-cta,.competition-link,.faq-item>button,.gallery-filters button,.schedule-day-switch button,.footer-end>button';
 const GLYPHS = 'ΑΒΓΔΕΖΗΘΛΞΠΣΦΨΩ0123456789<>/=+*';
 const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
