@@ -1500,7 +1500,7 @@ function ContactPage() {
         >
           <span className="eyebrow"><span /> CONTACT INFORMATION</span>
           <h2>Let's start a <em>conversation.</em></h2>
-          <p>Official contact details and social channels will be published here when confirmed.</p>
+          <p>For event enquiries, email the VISION X team. Official social channels will be published here when confirmed.</p>
           <div className="contact-info-list">
             <motion.div whileHover={{ x: 8 }}>
               <MapPin size={20} />
@@ -1513,7 +1513,7 @@ function ContactPage() {
               <Mail size={20} />
               <span>
                 <small>OFFICIAL EMAIL</small>
-                <strong>To be announced</strong>
+                <a href="mailto:chitkararesearchclub.osl@gmail.com">chitkararesearchclub.osl@gmail.com</a>
               </span>
             </motion.div>
             <motion.div whileHover={{ x: 8 }}>

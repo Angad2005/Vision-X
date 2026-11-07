@@ -19,7 +19,7 @@ A React + Vite website for VISION X 2026, the Chitkara Research Club event sched
 
 ## Content notes
 
-The source event brief does not provide confirmed schedule timings, venue rooms, speaker/judge profiles, competition-wise prize allocations, gallery assets, official email addresses or social handles. Those areas are marked as pending rather than populated with invented information. The vision and mission copy is labelled as draft editorial wording for review.
+The source event brief does not provide confirmed schedule timings, venue rooms, speaker/judge profiles, competition-wise prize allocations, gallery assets or official social handles. Those areas are marked as pending rather than populated with invented information. The official contact email is listed on the Contact page. The vision and mission copy is labelled as draft editorial wording for review.
 
 ## Getting started
 
