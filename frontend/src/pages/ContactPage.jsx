@@ -9,7 +9,7 @@ export default function ContactPage() {
     { q: 'Where will the event take place?', a: 'At Chitkara University, Punjab.' },
     { q: 'Which competitions are part of VISION X?', a: 'VOX SPHERE, INNOVISTA, BATTLE OF WITS and VISIONATHON.' },
     { q: 'Where can I find the day-wise schedule?', a: 'The Schedule page includes a two-day overview. Session timings, competition slots, breaks and venue details will be added once finalised.' },
-    { q: 'What is the prize pool?', a: 'The total prize pool is listed as 30K. Competition-wise allocations and award details will be announced once finalised.' },
+    // { q: 'What is the prize pool?', a: 'The total prize pool is listed as 30K. Competition-wise allocations and award details will be announced once finalised.' },
   ];
   const [openFaq, setOpenFaq] = useState(0);
 

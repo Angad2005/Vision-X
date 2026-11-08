@@ -1,18 +1,18 @@
 // Reusable motion variants used across pages
 export const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 1, y: 16, clipPath: 'inset(100% 0 0 0)' },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    clipPath: 'inset(-8% 0 0 0)',
+    transition: { duration: 0.52, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 export const staggerContainer = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.07, delayChildren: 0.12 },
   },
 };
 

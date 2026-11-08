@@ -1,25 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 
-const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.prize-detail-card,.gallery-card,.schedule-item,.journey-card,.lineage-card,.lexicon-card';
-const SCRAMBLE = '.page-hero-kicker,.eyebrow,.hero-pretitle,.hero-subtitle,.team-role,.competition-type,.gallery-card-copy>span,.hero-event-meta';
+const TILT = '.competition-card,.team-card,.home-intro-card,.about-pillar,.detail-card,.prize-detail-card,.gallery-card,.schedule-item,.journey-card,.lineage-card,.lexicon-card,.award-card';
 const COUNT = '.prize-total-card>div>strong';
 const RIPPLE = '.button,.nav-cta,.competition-link,.faq-item>button,.gallery-filters button,.schedule-day-switch button,.footer-end>button';
-const GLYPHS = 'ΑΒΓΔΕΖΗΘΛΞΠΣΦΨΩ0123456789<>/=+*';
 const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function scrambleNode(node) {
-  const to = node.nodeValue;
-  if (!to.trim()) return;
-  let f = 0;
-  const total = 24;
-  const id = setInterval(() => {
-    f++;
-    const p = f / total;
-    node.nodeValue = [...to].map((c, i) => (c === ' ' || i < p * to.length ? c : GLYPHS[(Math.random() * GLYPHS.length) | 0])).join('');
-    if (f >= total) { node.nodeValue = to; clearInterval(id); }
-  }, 32);
-}
 
 function countUp(el) {
   const text = el.textContent;
@@ -52,9 +37,9 @@ function Curtain() {
             key={`${letter}-${index}`}
             className="fx-curtain-letter"
             aria-hidden="true"
-            initial={{ opacity: 0, y: 22, rotateX: -45, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
-            transition={{ delay: 0.1 + index * 0.045, duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 14, rotateX: -24 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ delay: 0.08 + index * 0.04, duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
           >
             {letter}
           </motion.span>
@@ -62,9 +47,9 @@ function Curtain() {
         <motion.b
           className="fx-curtain-x"
           aria-hidden="true"
-          initial={{ opacity: 0, y: 18, scale: 1.5, rotate: -25, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, y: 0, scale: 1, rotate: 0, filter: 'blur(0px)' }}
-          transition={{ delay: 0.4, duration: 0.5, type: 'spring', stiffness: 180, damping: 16 }}
+          initial={{ opacity: 0, y: 12, scale: 1.25, rotate: -18 }}
+          animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+          transition={{ delay: 0.28, duration: 0.4, type: 'spring', stiffness: 180, damping: 18 }}
         >
           X
         </motion.b>
@@ -81,17 +66,13 @@ function useDomMagic() {
       entries.forEach((en) => {
         if (!en.isIntersecting) return;
         io.unobserve(en.target);
-        if (en.target.matches(COUNT)) return countUp(en.target);
-        const w = document.createTreeWalker(en.target, NodeFilter.SHOW_TEXT);
-        const nodes = [];
-        while (w.nextNode()) nodes.push(w.currentNode);
-        nodes.forEach(scrambleNode);
+        if (en.target.matches(COUNT)) countUp(en.target);
       });
     }, { threshold: 0.6 });
 
     const scan = (el) => {
       if (el.nodeType !== 1) return;
-      const all = [el, ...el.querySelectorAll(`${TILT},${SCRAMBLE},${COUNT}`)];
+      const all = [el, ...el.querySelectorAll(`${TILT},${COUNT}`)];
       all.forEach((n) => {
         if (!n.matches) return;
         if (n.matches(TILT) && !n.querySelector(':scope>.fx-sheen')) {
@@ -99,7 +80,7 @@ function useDomMagic() {
           s.className = 'fx-sheen'; s.setAttribute('aria-hidden', 'true');
           n.appendChild(s);
         }
-        if (!reduce && (n.matches(SCRAMBLE) || n.matches(COUNT)) && !n.dataset.fx) { n.dataset.fx = '1'; io.observe(n); }
+        if (!reduce && n.matches(COUNT) && !n.dataset.fx) { n.dataset.fx = '1'; io.observe(n); }
       });
     };
     scan(root);

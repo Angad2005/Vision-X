@@ -34,7 +34,8 @@ export default function HomePage({ onNavigate }) {
               FROM CURIOSITY <i>TO</i> IMPACT
             </motion.div>
             <motion.p className="hero-description" variants={fadeInUp}>
-              A meeting ground for ideas, research and innovation — where questions become conversations, evidence becomes insight, and curiosity moves towards impact.
+              A meeting ground for ideas, research and innovation <br/>
+              where questions become conversations, evidence becomes insight, <br/>and curiosity moves towards impact.
             </motion.p>
             <motion.div className="hero-event-meta" variants={fadeInUp}>
               <span><CalendarDays size={16} /> 27–28 NOVEMBER 2026</span>
@@ -49,7 +50,7 @@ export default function HomePage({ onNavigate }) {
                 REGISTER NOW <ArrowRight size={16} />
               </MagneticButton>
             </motion.div>
-            <motion.div variants={fadeInUp}>
+            <motion.div className="hero-countdown-wrap" variants={fadeInUp}>
               <Countdown />
             </motion.div>
           </motion.div>

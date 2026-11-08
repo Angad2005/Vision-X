@@ -9,10 +9,10 @@ const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 function Intro({ onDone }) {
   useEffect(() => { const t = setTimeout(onDone, 3100); return () => clearTimeout(t); }, [onDone]);
   return (
-    <motion.div className="fx-intro" exit={{ opacity: 0, scale: 1.08, filter: 'blur(14px)' }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+    <motion.div className="fx-intro" exit={{ opacity: 0, scale: 1.03 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
       <div className="fx-intro-word">
         {'VISION'.split('').map((l, i) => (
-          <motion.span key={i} initial={{ opacity: 0, y: 34, filter: 'blur(20px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ delay: 0.3 + i * 0.12, duration: 1, ease: [0.22, 1, 0.36, 1] }}>{l}</motion.span>
+          <motion.span key={i} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 + i * 0.1, duration: 0.68, ease: [0.22, 1, 0.36, 1] }}>{l}</motion.span>
         ))}
         <motion.b initial={{ opacity: 0, scale: 2.8, rotate: -35 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ delay: 1.3, type: 'spring', stiffness: 130, damping: 11 }}>X</motion.b>
       </div>
@@ -73,7 +73,7 @@ function useInteractions() {
       card = c; mag = b;
       if (c) {
         const r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
-        c.style.rotate = `${-py} ${px} 0 ${Math.min(7, Math.hypot(px, py) * 14)}deg`;
+        c.style.rotate = `${-py} ${px} 0 ${Math.min(3.5, Math.hypot(px, py) * 7)}deg`;
       }
       if (b) {
         const r = b.getBoundingClientRect();
