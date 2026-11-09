@@ -8,7 +8,8 @@ export const EVENT_END = new Date('2026-11-29T00:00:00+05:30');
 
 export const PAGES = ['home', 'about', 'competitions', 
     // 'schedule', 'prizes', 'gallery', 
-    'team', 'contact', 'register'];
+    // 'team',
+    'contact', 'register'];
 
 export function openRegistrationForm() {
   window.open(REGISTRATION_URL, '_blank', 'noopener,noreferrer');

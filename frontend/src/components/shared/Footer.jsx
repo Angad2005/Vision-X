@@ -10,7 +10,7 @@ export default function Footer({ onNavigate }) {
     // ['schedule', 'Event schedule'],
     // ['prizes', 'Prizes & recognition'],
     // ['gallery', 'Gallery & highlights'],
-    ['team', 'Team VISION X'],
+    // ['team', 'Team VISION X'],
     ['contact', 'Contact & FAQs'],
     ['register', 'Registration'],
   ];

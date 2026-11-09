@@ -20,7 +20,7 @@ export default function Header({ activePage, onNavigate }) {
     ['about', 'ABOUT'],
     ['competitions', 'EVENTS'],
     // ['schedule', 'SCHEDULE'],
-    ['team', 'TEAM'],
+    // ['team', 'TEAM'],
   ];
   const moreItems = [
     // ['prizes', 'Prizes & recognition'],

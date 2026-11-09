@@ -18,7 +18,7 @@ import CompetitionsPage from './pages/CompetitionsPage';
 // import SchedulePage from './pages/SchedulePage';
 // import PrizesPage from './pages/PrizesPage';
 // import GalleryPage from './pages/GalleryPage';
-import TeamPage from './pages/TeamPage';
+// import TeamPage from './pages/TeamPage';
 import ContactPage from './pages/ContactPage';
 import RegisterPage from './pages/RegisterPage';
 
@@ -32,14 +32,16 @@ export default function App() {
   const [activePage, setActivePage] = useState(getInitialPage);
   const [showTop, setShowTop] = useState(false);
   const [pendingSection, setPendingSection] = useState(null);
+  const [guidelinesRequest, setGuidelinesRequest] = useState(0);
 
   useEffect(() => {
     document.documentElement.style.colorScheme = 'dark';
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#111014');
   }, []);
 
-  const navigate = (page, sectionId) => {
+  const navigate = (page, sectionId, options = {}) => {
     if (!PAGES.includes(page)) return;
+    if (options.openGuidelines) setGuidelinesRequest((request) => request + 1);
     if (sectionId && page === activePage) {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
@@ -90,11 +92,11 @@ export default function App() {
           >
             {activePage === 'home' && <HomePage onNavigate={navigate} />}
             {activePage === 'about' && <AboutPage />}
-            {activePage === 'competitions' && <CompetitionsPage onNavigate={navigate} />}
+            {activePage === 'competitions' && <CompetitionsPage onNavigate={navigate} guidelinesRequest={guidelinesRequest} />}
             {/* {activePage === 'schedule' && <SchedulePage />}
             {activePage === 'prizes' && <PrizesPage />}
             {activePage === 'gallery' && <GalleryPage />} */}
-            {activePage === 'team' && <TeamPage />}
+            {/* {activePage === 'team' && <TeamPage />} */}
             {activePage === 'contact' && <ContactPage />}
             {activePage === 'register' && <RegisterPage onNavigate={navigate} />}
           </motion.div>

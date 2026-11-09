@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowUpRight, Check, Landmark } from 'lucide-react';
+import { ArrowUpRight, Landmark } from 'lucide-react';
 import PageHero from '../components/shared/PageHero';
 import MagneticButton from '../components/shared/MagneticButton';
 import { REGISTRATION_URL, REGISTRATION_QR_SRC } from '../utils/constants';
@@ -20,8 +20,9 @@ export default function RegisterPage({ onNavigate }) {
           <span className="eyebrow"><span /> OFFICIAL REGISTRATION</span>
           <h2>One step closer <br />to <em>what's next.</em></h2>
           <p>Choose one of the four events before registering, or scan the QR code to open the form. VISION X 2026 takes place on 27–28 November at Chitkara University, Punjab.</p>
-          <div className="registration-note"><Check size={16} /><span>Chitkara Research Club event</span></div>
-          <div className="registration-note"><Check size={16} /><span>Four event formats</span></div>
+          <MagneticButton className="button button-primary registration-more-details" onClick={() => onNavigate('competitions', 'event-showcase', { openGuidelines: true })} strength={0.2}>
+            MORE DETAILS <ArrowUpRight size={16} />
+          </MagneticButton>
           <div className="registration-aside-seal">
             <Landmark size={20} />
             <span>ACADEMIA · RESEARCH · INNOVATION</span>
