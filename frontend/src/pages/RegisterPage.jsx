@@ -1,11 +1,10 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, Check, Landmark } from 'lucide-react';
 import PageHero from '../components/shared/PageHero';
-import BrandLogo from '../components/shared/BrandLogo';
 import MagneticButton from '../components/shared/MagneticButton';
-import { REGISTRATION_URL, REGISTRATION_QR_SRC, openRegistrationForm } from '../utils/constants';
+import { REGISTRATION_URL, REGISTRATION_QR_SRC } from '../utils/constants';
 
-export default function RegisterPage() {
+export default function RegisterPage({ onNavigate }) {
   return (
     <main className="subpage register-page">
       <PageHero
@@ -18,15 +17,11 @@ export default function RegisterPage() {
 
       <section className="section-block shell compact-top registration-section">
         <motion.div className="registration-aside" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <div className="registration-logo">
-            <BrandLogo alt="Vision X" />
-            <span>VISION X<br />2026</span>
-          </div>
           <span className="eyebrow"><span /> OFFICIAL REGISTRATION</span>
           <h2>One step closer <br />to <em>what's next.</em></h2>
-          <p>Register for VISION X 2026 with the button or QR code. The event will take place on 27–28 November 2026 at Chitkara University, Punjab.</p>
+          <p>Choose one of the four events before registering, or scan the QR code to open the form. VISION X 2026 takes place on 27–28 November at Chitkara University, Punjab.</p>
           <div className="registration-note"><Check size={16} /><span>Chitkara Research Club event</span></div>
-          <div className="registration-note"><Check size={16} /><span>Four competition formats</span></div>
+          <div className="registration-note"><Check size={16} /><span>Four event formats</span></div>
           <div className="registration-aside-seal">
             <Landmark size={20} />
             <span>ACADEMIA · RESEARCH · INNOVATION</span>
@@ -42,8 +37,8 @@ export default function RegisterPage() {
             <span className="form-live"><i /> OPEN NOW</span>
           </div>
           <div className="registration-cta">
-            <p>Use the official Google Form to submit your registration, or scan the QR code from your phone.</p>
-            <MagneticButton className="button button-primary" onClick={openRegistrationForm} strength={0.25}>
+            <p>Choose an event to see its details and registration options, or scan the QR code from your phone.</p>
+            <MagneticButton className="button button-primary" onClick={() => onNavigate('competitions', 'event-showcase')} strength={0.25}>
               REGISTER NOW <ArrowUpRight size={16} />
             </MagneticButton>
             <figure className="registration-qr">

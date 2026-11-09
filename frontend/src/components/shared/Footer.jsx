@@ -1,13 +1,12 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, MapPin } from 'lucide-react';
-import BrandLogo from './BrandLogo';
 import GreekKey from './GreekKey';
 import MagneticButton from './MagneticButton';
 
 export default function Footer({ onNavigate }) {
   const links = [
     ['about', 'About VISION X'],
-    ['competitions', 'Competitions'],
+    ['competitions', 'Events'],
     // ['schedule', 'Event schedule'],
     // ['prizes', 'Prizes & recognition'],
     // ['gallery', 'Gallery & highlights'],
@@ -21,9 +20,7 @@ export default function Footer({ onNavigate }) {
       <GreekKey className="footer-key" />
       <div className="shell footer-main">
         <div className="footer-brand">
-          <div className="footer-logo">
-            <BrandLogo alt="Vision X" />
-          </div>
+          <div className="footer-wordmark">VISION <em>X</em></div>
           <p>FROM CURIOSITY TO IMPACT</p>
           <small>A flagship initiative by Chitkara Research Club.</small>
           <div className="footer-greek">
@@ -49,7 +46,7 @@ export default function Footer({ onNavigate }) {
             THE NEXT IDEA <br />
             <em>STARTS WITH YOU.</em>
           </h3>
-          <MagneticButton onClick={() => onNavigate('register')} strength={0.2}>
+          <MagneticButton onClick={() => onNavigate('competitions', 'event-showcase')} strength={0.2}>
             TAKE YOUR PLACE <ArrowUpRight size={15} />
           </MagneticButton>
           <small>© 2026 CHITKARA RESEARCH CLUB</small>

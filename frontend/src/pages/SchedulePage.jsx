@@ -62,7 +62,7 @@ export default function SchedulePage() {
             </div>
             <motion.div className="schedule-items" initial="hidden" animate="visible" variants={staggerContainer}>
               {scheduleItems.map(({ icon: Icon, label, title, status }, index) => (
-                <motion.div className="schedule-item" key={label} variants={fadeInUp} whileHover={{ x: 8, scale: 1.02 }} transition={{ type: 'spring', stiffness: 300 }}>
+                <motion.div className="schedule-item" key={label} variants={fadeInUp} whileHover={{ x: 6, scale: 1.015 }} transition={{ type: 'spring', stiffness: 300 }}>
                   <div className="schedule-item-icon"><Icon size={19} /></div>
                   <div className="schedule-item-copy">
                     <small>0{index + 1} · {label}</small>

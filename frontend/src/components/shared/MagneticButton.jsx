@@ -14,8 +14,8 @@ export default function MagneticButton({
   const handleMouse = (e) => {
     const { clientX, clientY } = e;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const x = (clientX - (left + width / 2)) * strength;
-    const y = (clientY - (top + height / 2)) * strength;
+    const x = (clientX - (left + width / 2)) * strength * 0.55;
+    const y = (clientY - (top + height / 2)) * strength * 0.55;
     setPosition({ x, y });
   };
 

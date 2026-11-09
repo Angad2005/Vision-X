@@ -7,7 +7,7 @@ export default function ContactPage() {
   const faqs = [
     { q: 'When is VISION X 2026?', a: 'The event is scheduled for 27–28 November 2026.' },
     { q: 'Where will the event take place?', a: 'At Chitkara University, Punjab.' },
-    { q: 'Which competitions are part of VISION X?', a: 'VOX SPHERE, INNOVISTA, BATTLE OF WITS and VISIONATHON.' },
+    { q: 'Which events are part of VISION X?', a: 'VOX SPHERE, INNOVISTA, BATTLE OF WITS and VISIONATHON.' },
     { q: 'Where can I find the day-wise schedule?', a: 'The Schedule page includes a two-day overview. Session timings, competition slots, breaks and venue details will be added once finalised.' },
     // { q: 'What is the prize pool?', a: 'The total prize pool is listed as 30K. Competition-wise allocations and award details will be announced once finalised.' },
   ];
@@ -29,21 +29,21 @@ export default function ContactPage() {
           <h2>Let's start a <em>conversation.</em></h2>
           <p>For event enquiries, email the VISION X team. Official social channels will be published here when confirmed.</p>
           <div className="contact-info-list">
-            <motion.div whileHover={{ x: 8 }}>
+            <motion.div whileHover={{ x: 5 }}>
               <MapPin size={20} />
               <span>
                 <small>VENUE</small>
                 <strong>Chitkara University, Punjab</strong>
               </span>
             </motion.div>
-            <motion.div whileHover={{ x: 8 }}>
+            <motion.div whileHover={{ x: 5 }}>
               <Mail size={20} />
               <span>
                 <small>OFFICIAL EMAIL</small>
                 <a href="mailto:chitkararesearchclub.osl@gmail.com">chitkararesearchclub.osl@gmail.com</a>
               </span>
             </motion.div>
-            <motion.div whileHover={{ x: 8 }}>
+            <motion.div whileHover={{ x: 5 }}>
               <Instagram size={20} />
               <span>
                 <small>SOCIAL MEDIA</small>

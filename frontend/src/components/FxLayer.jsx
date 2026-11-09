@@ -31,7 +31,7 @@ function Particles() {
     let w, h, raf, pts = [];
     const size = () => {
       w = c.width = innerWidth; h = c.height = innerHeight;
-      pts = Array.from({ length: Math.min(70, Math.floor(w / 22)) }, () => ({
+      pts = Array.from({ length: Math.min(52, Math.floor(w / 26)) }, () => ({
         x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
         r: Math.random() * 1.6 + .5, red: Math.random() < .18,
       }));
@@ -73,11 +73,11 @@ function useInteractions() {
       card = c; mag = b;
       if (c) {
         const r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
-        c.style.rotate = `${-py} ${px} 0 ${Math.min(3.5, Math.hypot(px, py) * 7)}deg`;
+        c.style.rotate = `${-py} ${px} 0 ${Math.min(1.4, Math.hypot(px, py) * 3)}deg`;
       }
       if (b) {
         const r = b.getBoundingClientRect();
-        b.style.translate = `${(e.clientX - r.left - r.width / 2) * .22}px ${(e.clientY - r.top - r.height / 2) * .35}px`;
+        b.style.translate = `${(e.clientX - r.left - r.width / 2) * .12}px ${(e.clientY - r.top - r.height / 2) * .2}px`;
       }
     };
     addEventListener('pointermove', move, { passive: true });

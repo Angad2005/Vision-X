@@ -32,6 +32,7 @@ coverage/
 .DS_Store
 Thumbs.db
 Desktop.ini
+*:Zone.Identifier
 
 # IDE and editor files
 .idea/

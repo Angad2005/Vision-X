@@ -12,7 +12,7 @@ export default function TeamCard({ member, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.07 }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -6, scale: 1.015 }}
     >
       <div className={`team-photo ${member.image ? 'has-photo' : ''}`}>
         {member.image && !photoFailed ? (

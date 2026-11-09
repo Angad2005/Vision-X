@@ -42,7 +42,7 @@ export default function GalleryPage() {
         <motion.div className="gallery-grid" layout>
           <AnimatePresence mode="popLayout">
             {visibleItems.map(({ id, title, tag, icon: Icon, code, shape }) => (
-              <motion.article className="gallery-card" key={id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }} whileHover={{ y: -8, scale: 1.02 }}>
+              <motion.article className="gallery-card" key={id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.3 }} whileHover={{ y: -6, scale: 1.015 }}>
                 <div className={`gallery-visual ${shape}`}>
                   <span className="gallery-code">{code}</span>
                   <Icon size={38} strokeWidth={1.1} />

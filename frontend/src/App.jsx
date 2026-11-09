@@ -31,17 +31,23 @@ export default function App() {
 
   const [activePage, setActivePage] = useState(getInitialPage);
   const [showTop, setShowTop] = useState(false);
+  const [pendingSection, setPendingSection] = useState(null);
 
   useEffect(() => {
     document.documentElement.style.colorScheme = 'dark';
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#111014');
   }, []);
 
-  const navigate = (page) => {
+  const navigate = (page, sectionId) => {
     if (!PAGES.includes(page)) return;
+    if (sectionId && page === activePage) {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    setPendingSection(sectionId ?? null);
     setActivePage(page);
     window.history.pushState(null, '', `#${page}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!sectionId) window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -72,10 +78,15 @@ export default function App() {
           <motion.div
             className="page-stage"
             key={activePage}
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            onAnimationComplete={() => {
+              if (!pendingSection) return;
+              document.getElementById(pendingSection)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setPendingSection(null);
+            }}
           >
             {activePage === 'home' && <HomePage onNavigate={navigate} />}
             {activePage === 'about' && <AboutPage />}
@@ -85,7 +96,7 @@ export default function App() {
             {activePage === 'gallery' && <GalleryPage />} */}
             {activePage === 'team' && <TeamPage />}
             {activePage === 'contact' && <ContactPage />}
-            {activePage === 'register' && <RegisterPage />}
+            {activePage === 'register' && <RegisterPage onNavigate={navigate} />}
           </motion.div>
         </AnimatePresence>
         <Footer onNavigate={navigate} />

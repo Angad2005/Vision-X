@@ -4,12 +4,9 @@ import { fadeInUp, staggerContainer, scaleIn } from '../utils/animations';
 import SectionHeading from '../components/shared/SectionHeading';
 import MagneticButton from '../components/shared/MagneticButton';
 import GreekKey from '../components/shared/GreekKey';
-import MeanderDivider from '../components/shared/MeanderDivider';
-import FloatingSymbols from '../components/shared/FloatingSymbols';
 import HeroEmblem from '../components/shared/HeroEmblem';
 import Countdown from '../components/shared/Countdown';
 import { CalendarDays, MapPin } from 'lucide-react';
-import { lineage } from '../data/lineage';
 
 export default function HomePage({ onNavigate }) {
   return (
@@ -17,6 +14,8 @@ export default function HomePage({ onNavigate }) {
       <section className="hero-section">
         <div className="hero-noise" />
         <div className="hero-grid-overlay" />
+        <div className="hero-greek-mark" aria-hidden="true">ΑΓΩΝ</div>
+        <div className="hero-sweep" aria-hidden="true" />
         <div className="hero-inner shell">
           <motion.div className="hero-copy" initial="hidden" animate="visible" variants={staggerContainer}>
             <motion.div className="hero-pretitle" variants={fadeInUp}>
@@ -28,7 +27,7 @@ export default function HomePage({ onNavigate }) {
               AN ENCOUNTER WITH <em>WHAT'S NEXT.</em>
             </motion.div>
             <motion.h1 variants={fadeInUp}>
-              VISION <span className="hero-x">X</span> <sup>2026</sup>
+              VISION <span className="hero-x">X</span>
             </motion.h1>
             <motion.div className="hero-subtitle" variants={fadeInUp}>
               FROM CURIOSITY <i>TO</i> IMPACT
@@ -44,9 +43,9 @@ export default function HomePage({ onNavigate }) {
             </motion.div>
             <motion.div className="hero-actions" variants={fadeInUp}>
               <MagneticButton className="button button-primary" onClick={() => onNavigate('competitions')} strength={0.25}>
-                EXPLORE COMPETITIONS <ArrowUpRight size={17} />
+                EXPLORE EVENTS <ArrowUpRight size={17} />
               </MagneticButton>
-              <MagneticButton className="button button-ghost" onClick={() => onNavigate('register')} strength={0.25}>
+              <MagneticButton className="button button-ghost" onClick={() => onNavigate('competitions', 'event-showcase')} strength={0.25}>
                 REGISTER NOW <ArrowRight size={16} />
               </MagneticButton>
             </motion.div>
@@ -55,10 +54,6 @@ export default function HomePage({ onNavigate }) {
             </motion.div>
           </motion.div>
           <HeroEmblem />
-          <div className="hero-index">
-            <span>01</span> <i /> FROM CURIOSITY TO IMPACT
-            <span className="hero-index-greek">ΓΝΩΘΙ ΣΕΑΥΤΟΝ</span>
-          </div>
           <div className="hero-sidecode">
             <span>VX / INSTITUTE</span>
             <span>IDEAS IN MOTION</span>
@@ -76,19 +71,19 @@ export default function HomePage({ onNavigate }) {
           text="VISION X brings the spirit of inquiry into a shared experience — connecting research, communication and original thinking."
         />
         <motion.div className="home-intro-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-          <motion.article className="home-intro-card" variants={scaleIn} whileHover={{ y: -8, scale: 1.02 }}>
+          <motion.article className="home-intro-card" variants={scaleIn} whileHover={{ y: -6, scale: 1.015 }}>
             <span className="intro-card-index">01 / INQUIRE</span>
             <Microscope size={27} />
             <h3>Research with purpose.</h3>
             <p>Ask better questions, examine evidence and make space for new perspectives.</p>
           </motion.article>
-          <motion.article className="home-intro-card" variants={scaleIn} whileHover={{ y: -8, scale: 1.02 }}>
+          <motion.article className="home-intro-card" variants={scaleIn} whileHover={{ y: -6, scale: 1.015 }}>
             <span className="intro-card-index">02 / EXCHANGE</span>
             <Network size={27} />
             <h3>Ideas in conversation.</h3>
             <p>Share knowledge, debate thoughtfully and learn from different disciplines.</p>
           </motion.article>
-          <motion.article className="home-intro-card" variants={scaleIn} whileHover={{ y: -8, scale: 1.02 }}>
+          <motion.article className="home-intro-card" variants={scaleIn} whileHover={{ y: -6, scale: 1.015 }}>
             <span className="intro-card-index">03 / CREATE</span>
             <Atom size={27} />
             <h3>Curiosity in motion.</h3>
@@ -100,28 +95,6 @@ export default function HomePage({ onNavigate }) {
             DISCOVER THE VISION <ArrowUpRight size={15} />
           </MagneticButton>
         </div>
-      </section>
-
-      <MeanderDivider glyph="Σ" label="ΙΣΤΟΡΙΑ · INQUIRY" />
-
-      <section className="section-block shell lineage-section" aria-labelledby="lineage-title">
-        <FloatingSymbols count={7} />
-        <SectionHeading
-          eyebrow="ΙΣΤΟΡΙΑ · A LINEAGE OF INQUIRY"
-          title={<span id="lineage-title">Standing on <em>ancient shoulders.</em></span>}
-          text="Many habits of modern research — observing, measuring, proving, classifying — were sharpened by thinkers of the ancient Greek world. VISION X carries that tradition forward."
-        />
-        <motion.div className="lineage-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={staggerContainer}>
-          {lineage.map((p, i) => (
-            <motion.article className="lineage-card" key={p.name} variants={scaleIn} whileHover={{ y: -6 }}>
-              <span className="lineage-glyph" aria-hidden="true">{p.glyph}</span>
-              <small>0{i + 1} · {p.era}</small>
-              <h3>{p.name}</h3>
-              <p>{p.text}</p>
-            </motion.article>
-          ))}
-        </motion.div>
-        <p className="lineage-note">Dates are approximate · ΕΥΡΗΚΑ — “I have found it”, attributed to Archimedes</p>
       </section>
 
       <section className="blueprint-section research-atlas" aria-labelledby="research-atlas-title">
@@ -188,7 +161,7 @@ export default function HomePage({ onNavigate }) {
             <h2>What if <em>you</em><br />changed everything?</h2>
             <p>Every breakthrough begins with a question. Bring yours to a space built around curiosity, research and the exchange of ideas.</p>
             <MagneticButton className="button button-light" onClick={() => onNavigate('competitions')} strength={0.25}>
-              FIND YOUR ARENA <ArrowUpRight size={17} />
+              FIND YOUR EVENT <ArrowUpRight size={17} />
             </MagneticButton>
           </motion.div>
           <div className="question-side-note">

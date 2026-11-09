@@ -3,9 +3,7 @@ import { Atom, FlaskConical, Landmark } from 'lucide-react';
 import { fadeInUp, staggerContainer, scaleIn } from '../utils/animations';
 import PageHero from '../components/shared/PageHero';
 import SectionHeading from '../components/shared/SectionHeading';
-import MeanderDivider from '../components/shared/MeanderDivider';
 import FloatingSymbols from '../components/shared/FloatingSymbols';
-import { lexicon } from '../data/lexicon';
 
 export default function AboutPage() {
   return (
@@ -25,21 +23,21 @@ export default function AboutPage() {
           text="VISION X is a platform for ideas, research presentation, debate and scholarly writing. It brings different ways of thinking into one shared event."
         />
         <motion.div className="about-pillar-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-          <motion.article className="about-pillar" variants={scaleIn} whileHover={{ y: -6 }}>
+          <motion.article className="about-pillar" variants={scaleIn} whileHover={{ y: -4 }}>
             <span>01</span>
             <Landmark size={28} />
             <h3>Ancient curiosity</h3>
             <p>Inspired by the long tradition of asking questions, examining ideas and seeking understanding.</p>
             <small>INQUIRY · ΓΝΩΣΙΣ</small>
           </motion.article>
-          <motion.article className="about-pillar" variants={scaleIn} whileHover={{ y: -6 }}>
+          <motion.article className="about-pillar" variants={scaleIn} whileHover={{ y: -4 }}>
             <span>02</span>
             <FlaskConical size={28} />
             <h3>Research culture</h3>
             <p>Making room for research presentations, posters and careful engagement with existing work.</p>
             <small>EVIDENCE · ΕΡΕΥΝΑ</small>
           </motion.article>
-          <motion.article className="about-pillar" variants={scaleIn} whileHover={{ y: -6 }}>
+          <motion.article className="about-pillar" variants={scaleIn} whileHover={{ y: -4 }}>
             <span>03</span>
             <Atom size={28} />
             <h3>Future thinking</h3>
@@ -49,28 +47,9 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      <MeanderDivider glyph="Λ" label="ΛΟΓΟΣ · WORD & REASON" />
-
-      <section className="section-block shell lexicon-section">
-        <SectionHeading
-          eyebrow="ΛΕΞΙΚΟΝ · THE LANGUAGE OF SCIENCE"
-          title={<>Words we <em>inherited.</em></>}
-          text="Much of the vocabulary of research comes straight from Greek. Every time you form a hypothesis or run an analysis, you are speaking it."
-        />
-        <motion.div className="lexicon-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={staggerContainer}>
-          {lexicon.map((w) => (
-            <motion.article className="lexicon-card" key={w.english} variants={fadeInUp} whileHover={{ y: -5 }}>
-              <strong lang="el">{w.greek}</strong>
-              <em>{w.roman}</em>
-              <p>“{w.meaning}”</p>
-              <span>→ {w.english}</span>
-            </motion.article>
-          ))}
-        </motion.div>
-      </section>
-
       <section className="about-mission-section">
-        <FloatingSymbols count={6} />
+        <FloatingSymbols count={4} />
+        <span className="greek-watermark" aria-hidden="true">ΛΟΓΟΣ</span>
         <div className="shell mission-grid">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <span className="eyebrow"><span /> OUR VISION · DRAFT</span>

@@ -5,8 +5,8 @@ export default function HeroEmblem() {
   const ref = useRef(null);
   const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0px', reducedMotion ? '0px' : '30px']);
-  const rotate = useTransform(scrollYProgress, [0, 1], ['0deg', reducedMotion ? '0deg' : '6deg']);
+  const y = useTransform(scrollYProgress, [0, 1], ['0px', reducedMotion ? '0px' : '16px']);
+  const rotate = useTransform(scrollYProgress, [0, 1], ['0deg', reducedMotion ? '0deg' : '3.5deg']);
 
   return (
     <motion.div
@@ -16,15 +16,15 @@ export default function HeroEmblem() {
     >
       <motion.div
         className="hero-emblem-float"
-        animate={reducedMotion ? undefined : { y: [0, -12, 0] }}
+        animate={reducedMotion ? undefined : { scale: [1, 1.015, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="hero-sculpture-scene" role="img" aria-label="A marble winged figure surrounded by crimson orbital rings">
+        <div className="hero-sculpture-scene" role="img" aria-label="A marble statue of Zeus framed by crimson energy and orbital rings">
           <div className="hero-sculpture-aura" aria-hidden="true" />
           <div className="hero-sculpture-orbit hero-sculpture-orbit-vertical" aria-hidden="true" />
           <img
             className="hero-figure"
-            src="/images/winged-marble-statue.jpg"
+            src="/images/WhatsApp%20Image%202026-11-09%20at%204.26.23%20PM.jpeg"
             alt=""
             draggable={false}
           />

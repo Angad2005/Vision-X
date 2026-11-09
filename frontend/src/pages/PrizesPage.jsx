@@ -40,7 +40,7 @@ export default function PrizesPage() {
 
         <motion.div className="prize-detail-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
           {prizeItems.map(({ name, text, icon: Icon }, index) => (
-            <motion.article className="prize-detail-card" key={name} variants={scaleIn} whileHover={{ y: -8, scale: 1.03 }}>
+            <motion.article className="prize-detail-card" key={name} variants={scaleIn} whileHover={{ y: -6, scale: 1.02 }}>
               <span>0{index + 1}</span>
               <Icon size={27} />
               <h3>{name}</h3>
