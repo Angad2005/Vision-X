@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { CalendarDays, ChevronDown, Instagram, Mail, MapPin } from 'lucide-react';
+import { motion } from 'motion/react';
+import { CalendarDays, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import PageHero from '../components/shared/PageHero';
 
 export default function ContactPage() {
-  const faqs = [
-    { q: 'When is VISION X 2026?', a: 'The event is scheduled for 27–28 November 2026.' },
-    { q: 'Where will the event take place?', a: 'At Chitkara University, Punjab.' },
-    { q: 'Which events are part of VISION X?', a: 'VOX SPHERE, INNOVISTA, BATTLE OF WITS and VISIONATHON.' },
-    { q: 'Where can I find the day-wise schedule?', a: 'The Schedule page includes a two-day overview. Session timings, competition slots, breaks and venue details will be added once finalised.' },
-    // { q: 'What is the prize pool?', a: 'The total prize pool is listed as 30K. Competition-wise allocations and award details will be announced once finalised.' },
+  const contactPeople = [
+    { name: 'Lubhit Dureja', phone: '9463209997' },
+    { name: 'Kanan Verma', phone: '9876534923' },
+    { name: 'ANchit Phutela', phone: '9888901700' },
   ];
-  const [openFaq, setOpenFaq] = useState(0);
 
   return (
     <main className="subpage">
       <PageHero
-        kicker="CONTACT & FREQUENTLY ASKED QUESTIONS"
+        kicker="CONTACT & SUPPORT"
         title={<>Find your way. <br /><em>Get in touch.</em></>}
         description="Event information for participants, researchers, speakers and visitors."
         footer="CHITKARA UNIVERSITY · PUNJAB"
@@ -27,7 +23,7 @@ export default function ContactPage() {
         <motion.div className="contact-info" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <span className="eyebrow"><span /> CONTACT INFORMATION</span>
           <h2>Let's start a <em>conversation.</em></h2>
-          <p>For event enquiries, email the VISION X team. Official social channels will be published here when confirmed.</p>
+          <p>For event enquiries and participant support, reach out to the VISION X organising team.</p>
           <div className="contact-info-list">
             <motion.div whileHover={{ x: 5 }}>
               <MapPin size={20} />
@@ -47,7 +43,7 @@ export default function ContactPage() {
               <Instagram size={20} />
               <span>
                 <small>SOCIAL MEDIA</small>
-                <strong>Official channels to be announced</strong>
+                <a href="https://www.instagram.com/chitkararesearchclub.osl/" target="_blank" rel="noopener noreferrer">@Chitkararesearchclub.osl</a>
               </span>
             </motion.div>
           </div>
@@ -59,25 +55,17 @@ export default function ContactPage() {
 
         <motion.div className="faq-panel" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="faq-heading">
-            <span className="eyebrow"><span /> QUICK ANSWERS</span>
-            <h3>Frequently asked <em>questions.</em></h3>
+            <span className="eyebrow"><span /> CONTACT PERSONS</span>
+            <h3>Reach the <em>team.</em></h3>
           </div>
-          <div className="faq-list">
-            {faqs.map((faq, index) => (
-              <motion.div className={`faq-item ${openFaq === index ? 'is-open' : ''}`} key={faq.q} layout>
-                <motion.button type="button" onClick={() => setOpenFaq(openFaq === index ? -1 : index)} aria-expanded={openFaq === index} whileHover={{ x: 4 }}>
-                  <span>{faq.q}</span>
-                  <motion.span animate={{ rotate: openFaq === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    <ChevronDown size={17} />
-                  </motion.span>
-                </motion.button>
-                <AnimatePresence initial={false}>
-                  {openFaq === index && (
-                    <motion.div className="faq-answer" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
-                      <p>{faq.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+          <div className="contact-info-list">
+            {contactPeople.map((person) => (
+              <motion.div key={person.name} whileHover={{ x: 5 }}>
+                <Phone size={20} />
+                <span>
+                  <small>{person.name}</small>
+                  <strong>{person.phone}</strong>
+                </span>
               </motion.div>
             ))}
           </div>

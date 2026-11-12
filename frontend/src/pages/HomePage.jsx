@@ -14,7 +14,6 @@ export default function HomePage({ onNavigate }) {
       <section className="hero-section">
         <div className="hero-noise" />
         <div className="hero-grid-overlay" />
-        <div className="hero-greek-mark" aria-hidden="true">ΑΓΩΝ</div>
         <div className="hero-sweep" aria-hidden="true" />
         <div className="hero-inner shell">
           <motion.div className="hero-copy" initial="hidden" animate="visible" variants={staggerContainer}>
