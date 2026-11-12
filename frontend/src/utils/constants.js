@@ -1,6 +1,9 @@
 // Shared constants used across the app
-export const REGISTRATION_URL = 'https://forms.gle/YOUR_FORM_ID';
-export const REGISTRATION_QR_SRC = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=12&ecc=M&color=941f30&bgcolor=fffaf1&data=${encodeURIComponent(REGISTRATION_URL)}`;
+export const UNIVERSITY_REGISTRATION_URL = 'https://forms.gle/NFwxVXPLp4dCearQ6';
+export const SCHOOL_REGISTRATION_URL = 'https://forms.gle/truroakCErv2YvZs7';
+export const REGISTRATION_URL = UNIVERSITY_REGISTRATION_URL;
+export const buildRegistrationQrSrc = (url) => `https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=12&ecc=M&color=941f30&bgcolor=fffaf1&data=${encodeURIComponent(url)}`;
+export const REGISTRATION_QR_SRC = buildRegistrationQrSrc(REGISTRATION_URL);
 export const VISION_X_LOGO_SRC = '/images/vision-x-logo-transparent.png';
 
 export const EVENT_START = new Date('2026-11-27T00:00:00+05:30');

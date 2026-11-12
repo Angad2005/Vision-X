@@ -2,12 +2,12 @@ import { motion } from 'motion/react';
 import { ArrowUpRight, Landmark } from 'lucide-react';
 import PageHero from '../components/shared/PageHero';
 import MagneticButton from '../components/shared/MagneticButton';
-import { REGISTRATION_QR_SRC } from '../utils/constants';
+import { buildRegistrationQrSrc, SCHOOL_REGISTRATION_URL, UNIVERSITY_REGISTRATION_URL } from '../utils/constants';
 
 export default function RegisterPage({ onNavigate }) {
   const registrationOptions = [
-    { label: 'For university', href: 'https://forms.gle/NFwxVXPLp4dCearQ6' },
-    { label: 'For school', href: 'https://forms.gle/truroakCErv2YvZs7' },
+    { label: 'For university', href: UNIVERSITY_REGISTRATION_URL, qr: buildRegistrationQrSrc(UNIVERSITY_REGISTRATION_URL) },
+    { label: 'For school', href: SCHOOL_REGISTRATION_URL, qr: buildRegistrationQrSrc(SCHOOL_REGISTRATION_URL) },
   ];
 
   return (
@@ -40,13 +40,13 @@ export default function RegisterPage({ onNavigate }) {
           <div className="registration-cta">
             <p>Choose your category and scan the QR code to register.</p>
             <div className="registration-qr-grid">
-              {registrationOptions.map(({ label, href }) => (
+              {registrationOptions.map(({ label, href, qr }) => (
                 <figure className="registration-qr" key={label}>
                   <MagneticButton className="button button-primary" onClick={() => window.open(href, '_blank', 'noopener,noreferrer')} strength={0.25}>
                     {label} <ArrowUpRight size={16} />
                   </MagneticButton>
                   <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open registration form for ${label}`}>
-                    <img src={REGISTRATION_QR_SRC} alt={`QR code linking to the VISION X 2026 registration form for ${label}`} width="220" height="220" />
+                    <img src={qr} alt={`QR code linking to the VISION X 2026 registration form for ${label}`} width="225" height="225" />
                   </a>
                 </figure>
               ))}
