@@ -134,11 +134,7 @@ export default function Header({ activePage, onNavigate }) {
             </AnimatePresence>
           </div>
 
-          <MagneticButton className="nav-cta" onClick={() => {
-            setMenuOpen(false);
-            setMoreOpen(false);
-            onNavigate('competitions', 'event-showcase');
-          }} strength={0.2}>
+          <MagneticButton className="nav-cta" onClick={() => go('register')} strength={0.2}>
             REGISTER <ArrowUpRight size={14} />
           </MagneticButton>
         </motion.nav>
